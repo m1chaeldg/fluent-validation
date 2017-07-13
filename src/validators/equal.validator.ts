@@ -1,13 +1,13 @@
-import { PropertyValidatorContext } from "./property.validator.context";
-import { PropertyValidator } from "./property.validator";
+import { PropertyValidator } from './property.validator'
+import { PropertyValidatorContext } from './property.validator.context'
 
 export class EqualValidator<T> extends PropertyValidator<T> {
 
-    constructor(public valueToCompare:any) {
-        super("");
+    constructor(public valueToCompare: {}) {
+        super('')
     }
 
-    public isValid(context: PropertyValidatorContext<T>): boolean {
-        return context.propertyValue === this.valueToCompare;
+    public isValid(context: PropertyValidatorContext<T>): Promise<boolean> {
+        return Promise.resolve(context.propertyValue === this.valueToCompare)
     }
 }

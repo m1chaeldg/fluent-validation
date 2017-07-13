@@ -1,5 +1,5 @@
 export interface StringSource {
-    getStringAsync(): Promise<string>;
+    getStringAsync(): Promise<string>
 }
 
 export class StaticStringSource implements StringSource {

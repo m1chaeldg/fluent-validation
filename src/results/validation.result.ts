@@ -1,4 +1,4 @@
-import { ValidationFailure } from "./validation.failure";
+import { ValidationFailure } from './validation.failure'
 
 export class ValidationResult {
 
@@ -9,6 +9,6 @@ export class ValidationResult {
      * Whether validation succeeded
      */
     public isValid(): boolean {
-        return this.errors.length === 0;
+        return this.errors.length === 0
     }
 }

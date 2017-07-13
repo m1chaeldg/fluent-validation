@@ -1,97 +1,104 @@
-import { ValidatorContext } from "../validator";
+import { ValidatorContext } from '../validator'
 
 class MessageFormatter {
-    placeholderValues: {};
+    private placeholderValues: {}
 
     /**
      * Default Property Name placeholder.
-     * 
-     * 
+     *
+     *
      * @memberof MessageFormatter
      */
-    public propertyName = "PropertyName"
+    public propertyName: string = 'PropertyName'
     /**
      * Default Property Value placeholder.
-     * 
-     * 
+     *
+     *
      * @memberof MessageFormatter
      */
-    public propertyValue = "PropertyValue"
+    public propertyValue: string = 'PropertyValue'
 
+    constructor() {
+        this.placeholderValues = {}
+    }
     /**
      *  Adds a value for a validation message placeholder.
-     * 
-     * @param {string} name 
-     * @param {*} value 
-     * @returns {MessageFormatter} 
-     * 
+     *
+     * @param {string} name
+     * @param {*} value
+     * @returns {MessageFormatter}
+     *
      * @memberof MessageFormatter
      */
-    public appendArgument(name: string, value: any): MessageFormatter {
-        this.placeholderValues[name] = value;
-        return this;
+    public appendArgument(name: string, value: {}): MessageFormatter {
+        this.placeholderValues[name] = value
+        return this
     }
 
     /**
      *  Appends a property name to the message.
-     * 
-     * @param {string} name 
-     * @returns {MessageFormatter} 
-     * 
+     *
+     * @param {string} name
+     * @returns {MessageFormatter}
+     *
      * @memberof MessageFormatter
      */
 
-    public AppendPropertyName(name: string): MessageFormatter {
-        return this.appendArgument(this.propertyName, name);
+    public appendPropertyName(name: string): MessageFormatter {
+        return this.appendArgument(this.propertyName, name)
     }
 
     /**
      * Appends a property value to the message.
-     * 
-     * @param {*} value 
-     * @returns {MessageFormatter} 
-     * 
+     *
+     * @param {*} value
+     * @returns {MessageFormatter}
+     *
      * @memberof MessageFormatter
      */
-    public AppendPropertyValue(value: any): MessageFormatter {
-        return this.appendArgument(this.propertyValue, value);
+    public appendPropertyValue(value: {}): MessageFormatter {
+        return this.appendArgument(this.propertyValue, value)
     }
 
     public buildMessage(messageTemplate: string): string {
 
-        let result = messageTemplate;
+        let result: string = messageTemplate
         for (let key in this.placeholderValues) {
-            let placeHolder = this.getPlaceholder(key)
-            let value = this.placeholderValues[key]
+            if (this.placeholderValues.hasOwnProperty(key)) {
+                let placeHolder: string = this.getPlaceholder(key)
+                // tslint:disable-next-line
+                let value: any = this.placeholderValues[key]
 
-            result = result.replace(placeHolder, value)
+                result = result.replace(placeHolder, value)
+            }
+
         }
 
-        return result;
+        return result
     }
 
     private getPlaceholder(key: string): string {
 
         switch (key) {
             case this.propertyName:
-                return "{" + this.propertyName + "}";
+                return '{' + this.propertyName + '}'
             case this.propertyValue:
-                return "{" + this.propertyValue + "}";
+                return '{' + this.propertyValue + '}'
             default:
-                return "{" + key + "}";
+                return '{' + key + '}'
         }
     }
 }
 
 export class PropertyValidatorContext<T> {
-    propertyValue: any;
-    propertyName: string;
-    instanceToValidate: T;
-    validatorContext: ValidatorContext<T>
-    messageFormatter: MessageFormatter
+    // tslint:disable-next-line
+    public propertyValue: any
+    public propertyName: string
+    public instanceToValidate: T
+    public validatorContext: ValidatorContext<T>
+    public messageFormatter: MessageFormatter
 
     constructor() {
-        this.messageFormatter = new MessageFormatter();
+        this.messageFormatter = new MessageFormatter()
     }
 }
-

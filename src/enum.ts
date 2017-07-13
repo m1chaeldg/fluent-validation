@@ -6,7 +6,7 @@ export enum CascadeMode {
     /**
      * When a rule fails, validation is stopped and all other rules in the chain will not be executed.
      */
-    StopOnFirstFailure
+    StopOnFirstFailure,
 }
 
 export enum ApplyConditionTo {
@@ -17,5 +17,5 @@ export enum ApplyConditionTo {
     /**
      * Applies the condition to the current validator only.
      */
-    CurrentValidator
+    CurrentValidator,
 }

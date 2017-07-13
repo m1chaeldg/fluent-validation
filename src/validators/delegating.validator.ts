@@ -1,28 +1,34 @@
-import { PropertyValidatorContext } from "./property.validator.context";
-import { PropertyValidator } from "./property.validator";
-import { ValidationFailure } from "../results/validation.failure";
-
+import { ValidationFailure } from '../results/validation.failure'
+import { PropertyValidator } from './property.validator'
+import { PropertyValidatorContext } from './property.validator.context'
 
 export class DelegatingValidator<T> extends PropertyValidator<T> {
     constructor(private condition: (instance: T) => Promise<boolean>, private innerValidator: PropertyValidator<T>) {
-        super("");
+        super('')
 
-        this.onValidateAsync = this._delegatingValidateAsync;
+        this.onValidateAsync = this._delegatingValidateAsync
     }
-
 
     private async _delegatingValidateAsync(context: PropertyValidatorContext<T>): Promise<ValidationFailure[]> {
 
-        let shouldValidate:boolean = await this.condition(context.instanceToValidate);
+        let shouldValidate: boolean = await this.condition(context.instanceToValidate)
         if (shouldValidate) {
-            return await this.innerValidator.validateAsync(context);
+            return await this.innerValidator.validateAsync(context)
         }
 
-        return Promise.resolve(new Array<ValidationFailure>());
+        return Promise.resolve([])
     }
 
-    public isValid(context: PropertyValidatorContext<T>): boolean {
-        return true;
+    /**
+     * this is not being use
+     *
+     * @param {PropertyValidatorContext<T>} context
+     * @returns {boolean}
+     *
+     * @memberof DelegatingValidator
+     */
+    public isValid(context: PropertyValidatorContext<T>): Promise<boolean> {
+        return Promise.resolve(true)
     }
 
 }

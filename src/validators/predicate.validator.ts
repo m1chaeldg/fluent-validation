@@ -1,22 +1,18 @@
-import { PropertyValidatorContext } from "./property.validator.context";
-import { PropertyValidator } from "./property.validator";
+import { PropertyValidator } from './property.validator'
+import { PropertyValidatorContext } from './property.validator.context'
 
-export interface Predicate<T>{
-    (instanceToValidate: T, propertyValue: any, propertyValidatorContext: PropertyValidatorContext<T>) : Promise<boolean>
-}
+type Predicate<T> = (instanceToValidate: T, propertyValue: {}, propertyValidatorContext: PropertyValidatorContext<T>) => Promise<boolean>
 
 export class PredicateValidator<T> extends PropertyValidator<T> {
 
-
     constructor(private predicate: Predicate<T>) {
-        super("");
+        super('')
     }
 
-    public isValid(context: PropertyValidatorContext<T>): boolean {
-        if (!this.predicate(context.instanceToValidate, context.propertyValue, context)) {
-            return false;
-        }
+    public async isValid(context: PropertyValidatorContext<T>): Promise<boolean> {
 
-        return true;
+        let isValid: boolean = await this.predicate(context.instanceToValidate, context.propertyValue, context)
+
+        return isValid
     }
 }
