@@ -1,15 +1,15 @@
 /**
-  * These rule settings are a broad, general recommendation for a good default
-  * configuration, but should be tuned for personal or team preferences if needed.
-  */
+ * These rule settings are a broad, general recommendation for a good default
+ * configuration, but should be tuned for personal or team preferences if needed.
+ */
 
 {
   "extends": "tslint:latest",
   "rules": {
     /**
-      * Security Rules. The following rules should be turned on because they find security issues
-      * or are recommended in the Microsoft Secure Development Lifecycle (SDL)
-      */
+     * Security Rules. The following rules should be turned on because they find security issues
+     * or are recommended in the Microsoft Secure Development Lifecycle (SDL)
+     */
     "insecure-random": true,
     "no-banned-terms": true,
     "no-delete-expression": true,
@@ -26,9 +26,9 @@
     "possible-timing-attack": true,
 
     /**
-      * Common Bugs and Correctness. The following rules should be turned on because they find
-      * common bug patterns in the code or enforce type safety.
-      */
+     * Common Bugs and Correctness. The following rules should be turned on because they find
+     * common bug patterns in the code or enforce type safety.
+     */
     "forin": true,
     "no-any": true,
     "no-arg": true,
@@ -65,9 +65,9 @@
     "valid-typeof": true,
 
     /**
-      * Code Clarity. The following rules should be turned on because they make the code
-      * generally more clear to the reader.
-      */
+     * Code Clarity. The following rules should be turned on because they make the code
+     * generally more clear to the reader.
+     */
     "adjacent-overload-signatures": true,
     "array-type": [true, "array"],
     "arrow-parens": false, // for simple functions the parens on arrow functions are not needed
@@ -75,16 +75,40 @@
     "class-name": true,
     "comment-format": [true, "check-space", "check-uppercase"],
     "export-name": false,
-    "function-name": true,
+    "function-name": [true, {
+      "method-regex": "^[a-z][\\w\\d]+$",
+      "private-method-regex": "^[a-z_][\\w\\d]+$",
+      "protected-method-regex": "^[a-z][\\w\\d]+$",
+      "static-method-regex": "^[A-Z_\\d]+$",
+      "function-regex": "^[a-z][\\w\\d]+$"
+    }],
     "import-name": false,
-    "interface-name": [true, "always-prefix"],
+    "interface-name": [true, "never-prefix"],
     "jsdoc-format": true,
-    "max-classes-per-file": [true, 3],  // we generally recommend making one public class per file
+    "max-classes-per-file": [true, 3], // we generally recommend making one public class per file
     "max-file-line-count": [true, 500],
-    "max-func-body-length": [true, 100, {"ignore-parameters-to-function-regex": "describe"}],
+    "max-func-body-length": [true, 100, {
+      "ignore-parameters-to-function-regex": "describe"
+    }],
     "max-line-length": [true, 140],
     "member-access": true,
-    "member-ordering": [true, { "order": "fields-first" }],
+    "member-ordering": [
+      true,
+      {
+        "order": [{
+            "name": "static non-private",
+            "kinds": [
+              "public-static-field",
+              "protected-static-field",
+              "public-static-method",
+              "protected-static-method"
+            ]
+          },
+          "instance-field",
+          "constructor"
+        ]
+      }
+    ],
     "missing-jsdoc": false,
     "new-parens": true,
     "no-construct": true,
@@ -94,7 +118,7 @@
     "no-function-expression": true,
     "no-multiline-string": true, // multiline-strings often introduce unnecessary whitespace into the string literals
     "no-null-keyword": false, // turn no-null-keyword off and use undefined to mean not initialized and null to mean without a value
-    "no-parameter-properties": true,
+    "no-parameter-properties": false,
     "no-relative-imports": false,
     "no-require-imports": true,
     "no-shadowed-variable": true,
@@ -107,22 +131,22 @@
     "no-var-self": true,
     "object-literal-sort-keys": false, // turn object-literal-sort-keys off and sort keys in a meaningful manner
     "one-variable-per-declaration": [true, "ignore-for-loop"],
-    "ordered-imports": [true, "case-insensitive"],
+    "ordered-imports": [false, "any"],
     "prefer-array-literal": true,
     "prefer-const": false,
     "prefer-for-of": true,
-    "typedef": [true, "call-signature", "parameter", "property-declaration", "variable-declaration", "member-variable-declaration"],
+    "typedef": [true, "call-signature", "parameter", "property-declaration", "member-variable-declaration"],
     "underscore-consistent-invocation": true,
     "unified-signatures": true,
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
 
     /**
-      * Whitespace related rules. The only recommended whitespace strategy is to pick a single format and
-      * be consistent.
-      */
+     * Whitespace related rules. The only recommended whitespace strategy is to pick a single format and
+     * be consistent.
+     */
     "align": [true, "parameters", "statements"],
     "curly": true,
-    "eofline": true,
+    "eofline": false,
     "import-spacing": true,
     "indent": [true, "spaces"],
     "no-empty-line-after-opening-brace": false,
@@ -132,8 +156,11 @@
     "object-literal-key-quotes": [true, "as-needed"],
     "one-line": [true, "check-open-brace", "check-catch", "check-else", "check-whitespace"],
     "quotemark": [true, "single"],
-    "semicolon": [true, "always"],
-    "trailing-comma": [true, {"singleline": "never", "multiline": "always"}], // forcing trailing commas for multi-line
+    "semicolon": [true, "never"],
+    "trailing-comma": [true, {
+      "singleline": "never",
+      "multiline": "always"
+    }], // forcing trailing commas for multi-line
     "typedef-whitespace": [
       true,
       {
@@ -154,23 +181,23 @@
     "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-separator", "check-type"],
 
     /**
-      * Controversial/Configurable rules.
-      */
-    "ban": false,                // only enable this if you have some code pattern that you want to ban
-    "import-blacklist": false,  // enable and configure this as you desire
-    "interface-over-type-literal": false,  // there are plenty of reasons to prefer interfaces
-    "no-angle-bracket-type-assertion": false,  // pick either type-cast format and use it consistently
-    "no-empty-interface": false,  // it is currently better to use the MS version of this rule
-    "no-inferred-empty-object-type": false,  // if the compiler is satisfied then this is probably not an issue
+     * Controversial/Configurable rules.
+     */
+    "ban": false, // only enable this if you have some code pattern that you want to ban
+    "import-blacklist": false, // enable and configure this as you desire
+    "interface-over-type-literal": false, // there are plenty of reasons to prefer interfaces
+    "no-angle-bracket-type-assertion": false, // pick either type-cast format and use it consistently
+    "no-empty-interface": false, // it is currently better to use the MS version of this rule
+    "no-inferred-empty-object-type": false, // if the compiler is satisfied then this is probably not an issue
     "no-internal-module": false, // only enable this if you are not using internal modules
-    "no-magic-numbers": false,  // by default it will find too many false positives
-    "no-mergeable-namespace": false,  // your project may require mergeable namespaces
-    "no-namespace": false,       // only enable this if you are not using modules/namespaces
-    "no-reference": true,        // in general you should use a module system and not /// reference imports
+    "no-magic-numbers": false, // by default it will find too many false positives
+    "no-mergeable-namespace": false, // your project may require mergeable namespaces
+    "no-namespace": false, // only enable this if you are not using modules/namespaces
+    "no-reference": true, // in general you should use a module system and not /// reference imports
     "no-unexternalized-strings": false, // the VS Code team has a specific localization process that this rule enforces
-    "object-literal-shorthand": false,  // object-literal-shorthand offers an abbreviation not an abstraction
-    "prefer-type-cast": true,   // pick either type-cast format and use it consistently
-    "space-before-function-paren": false   // turn this on if this is really your coding standard
+    "object-literal-shorthand": false, // object-literal-shorthand offers an abbreviation not an abstraction
+    "prefer-type-cast": true, // pick either type-cast format and use it consistently
+    "space-before-function-paren": false // turn this on if this is really your coding standard
   },
   "rulesDirectory": [
     "node_modules/tslint-microsoft-contrib"
