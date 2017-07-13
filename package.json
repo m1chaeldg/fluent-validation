@@ -1,13 +1,13 @@
 {
-  "name": "fluent-validation",
+  "name": "fluent-validation-js",
   "version": "1.0.0",
   "description": "a simple fluent validation framework using ES6",
   "main": "src/index.js",
-  "repository": "https://github.com/git-m1chael-dg/fluent-validation.git",
+  "repository": "https://github.com/m1chaeldg/fluent-validation.git",
   "author": "Michael de Guzman <mdeguzman.vss@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": ">=7.0.0",
+    "node": ">=8.0.0",
     "npm": ">=3.10.8"
   },
   "engineStrict": true,
@@ -18,11 +18,13 @@
     "rebuild": "yarn clean_build && yarn build",
     "rebuild_dev": "yarn clean_build && yarn build_dev",
     "watch": "tsc -w -p tsconfig.release.json",
-    "pretest": "yarn lint",
+    "pretest": "yarn build && yarn lint",
     "test": "yarn test-only",
     "test-only": "jest --coverage",
     "test:watch": "jest --watch",
     "lint": "tslint -t stylish '{src,__tests__,scripts}/**/*.{ts,tsx}'"
+  },
+  "dependencies": {
   },
   "devDependencies": {
     "@types/jest": "20.0.2",
@@ -38,20 +40,17 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
     "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx"
+      "js"
     ],
-    "testRegex": "<rootDir>(__tests__/).*\\.(test|spec)\\.(ts|js)$",
+    "testRegex": "(\\.(test|spec))\\.(js)$",
     "coverageDirectory": "coverage",
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx,js,jsx}",
       "!src/**/*.d.ts"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/"
     ]
   }
 }
