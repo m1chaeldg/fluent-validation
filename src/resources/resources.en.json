@@ -1,0 +1,7 @@
+{
+  "boolean": "exceeded {MaxLength} characters",
+  "email": "field is required",
+  "equal": "field is invalid",
+  "length" : "The password and confirmation password do not match.",
+  "required" : "email address already used"
+}

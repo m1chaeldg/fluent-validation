@@ -1,2 +1,2 @@
 # fluent-validation
-a simple validation framework using typescript
+a simple validation async fluent validation framework using typescript
