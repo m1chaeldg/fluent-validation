@@ -1,6 +1,6 @@
 {
   "name": "fluent-validation-js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a simple fluent validation framework using ES6",
   "main": "dist/src/index.js",
   "repository": "https://github.com/m1chaeldg/fluent-validation.git",
