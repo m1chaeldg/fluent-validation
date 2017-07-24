@@ -14,13 +14,14 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
-    // "outDir": "./bin",
+    "outDir": "./dist",
     "pretty": true,
     "removeComments": false,
     "sourceMap": true,
     "strictNullChecks": true,
     "target": "es2017",
-    "watch": true
+    "watch": true,
+    "declaration": true
   },
   "exclude": [
     "node_modules",

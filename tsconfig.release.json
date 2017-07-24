@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "allowJs": true,
+    "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "charset": "utf-8",
     "importHelpers": true,
@@ -14,12 +14,13 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
-    // "outDir": "./bin",
+    "outDir": "./dist",
     "pretty": false,
     "removeComments": true,
     "sourceMap": false,
     "strictNullChecks": true,
-    "target": "es2017"
+    "target": "es2017",
+    "declaration": true
   },
   "exclude": [
     "node_modules",

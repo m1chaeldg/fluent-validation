@@ -1,7 +1,7 @@
 import { PropertyValidator } from './property.validator'
 import { PropertyValidatorContext } from './property.validator.context'
 
-type Predicate<T> = (instanceToValidate: T, propertyValue: {}, propertyValidatorContext: PropertyValidatorContext<T>) => Promise<boolean>
+export type Predicate<T> = (instanceToValidate: T, propertyValue: {}, propertyValidatorContext: PropertyValidatorContext<T>) => Promise<boolean>
 
 export class PredicateValidator<T> extends PropertyValidator<T> {
 

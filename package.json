@@ -2,7 +2,7 @@
   "name": "fluent-validation-js",
   "version": "1.0.1",
   "description": "a simple fluent validation framework using ES6",
-  "main": "src/index.js",
+  "main": "dist/src/index.js",
   "repository": "https://github.com/m1chaeldg/fluent-validation.git",
   "author": "Michael de Guzman <mdeguzman.vss@gmail.com>",
   "license": "MIT",
@@ -12,7 +12,7 @@
   },
   "engineStrict": true,
   "scripts": {
-    "clean_build": "rimraf coverage bin/src tmp bin/*.js {src,__tests__}/**/*.{js,map}",
+    "clean_build": "rimraf coverage dist tmp bin/*.js {src,__tests__}/**/*.{js,map}",
     "build": "tsc -p tsconfig.release.json",
     "build_dev": "tsc -p tsconfig.json",
     "rebuild": "yarn clean_build && yarn build",

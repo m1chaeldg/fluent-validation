@@ -1,6 +1,6 @@
 import { ValidatorContext } from '../validator'
 
-class MessageFormatter {
+export class MessageFormatter {
     private placeholderValues: {}
 
     /**
