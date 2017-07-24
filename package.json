@@ -1,6 +1,6 @@
 {
   "name": "fluent-validation-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a simple fluent validation framework using ES6",
   "main": "dist/src/index.js",
   "repository": "https://github.com/m1chaeldg/fluent-validation.git",
@@ -13,6 +13,7 @@
   "engineStrict": true,
   "scripts": {
     "clean_build": "rimraf coverage dist tmp bin/*.js {src,__tests__}/**/*.{js,map}",
+    "prebuild": "yarn clean_build",
     "build": "tsc -p tsconfig.release.json",
     "build_dev": "tsc -p tsconfig.json",
     "rebuild": "yarn clean_build && yarn build",
